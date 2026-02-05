@@ -1,3 +1,88 @@
-@for (todo of todos(); track todo.id) {
-<li>{{ todo.title }}</li>
-}
+<section class="todoapp">
+  <header class="header">
+    <h1>todos</h1>
+    <input
+      class="new-todo"
+      placeholder="What needs to be done?"
+      autofocus
+      [ngModel]="newTodoTitle()"
+      (ngModelChange)="newTodoTitle.set($event)"
+      (keyup.enter)="addTodo()"
+    />
+  </header>
+
+  @if (hasTodos()) {
+    <section class="main">
+      <input
+        id="toggle-all"
+        class="toggle-all"
+        type="checkbox"
+        [checked]="allCompleted()"
+        (change)="toggleAll()"
+      />
+      <label for="toggle-all">Mark all as complete</label>
+
+      <ul class="todo-list">
+        @for (todo of filteredTodos(); track todo.id) {
+          <li [class.completed]="todo.completed" [class.editing]="editingTodoId() === todo.id">
+            <div class="view">
+              <input
+                class="toggle"
+                type="checkbox"
+                [checked]="todo.completed"
+                (change)="toggleTodo(todo.id)"
+              />
+              <label (dblclick)="startEditing(todo.id, todo.title)">{{ todo.title }}</label>
+              <button class="destroy" (click)="deleteTodo(todo.id)"></button>
+            </div>
+            @if (editingTodoId() === todo.id) {
+              <input
+                class="edit"
+                [ngModel]="editingTitle()"
+                (ngModelChange)="editingTitle.set($event)"
+                (blur)="saveEdit()"
+                (keyup.enter)="saveEdit()"
+                (keyup.escape)="cancelEdit()"
+                #editInput
+              />
+            }
+          </li>
+        }
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <span class="todo-count">
+        <strong>{{ activeCount() }}</strong>
+        {{ activeCount() === 1 ? 'item' : 'items' }} left
+      </span>
+
+      <ul class="filters">
+        <li>
+          <a
+            [class.selected]="filter() === 'all'"
+            (click)="setFilter('all')"
+          >All</a>
+        </li>
+        <li>
+          <a
+            [class.selected]="filter() === 'active'"
+            (click)="setFilter('active')"
+          >Active</a>
+        </li>
+        <li>
+          <a
+            [class.selected]="filter() === 'completed'"
+            (click)="setFilter('completed')"
+          >Completed</a>
+        </li>
+      </ul>
+
+      @if (hasCompletedTodos()) {
+        <button class="clear-completed" (click)="clearCompleted()">
+          Clear completed
+        </button>
+      }
+    </footer>
+  }
+</section>
