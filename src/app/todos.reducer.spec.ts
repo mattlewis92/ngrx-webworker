@@ -1,8 +1,8 @@
-import { reducer, initialState } from './todos.reducer';
+import { reducer, initialState } from "./todos.reducer";
 
-describe('Todos Reducer', () => {
-  describe('an unknown action', () => {
-    it('should return the previous state', () => {
+describe("Todos Reducer", () => {
+  describe("an unknown action", () => {
+    it("should return the previous state", () => {
       const action = {} as any;
 
       const result = reducer(initialState, action);

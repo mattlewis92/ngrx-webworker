@@ -1,9 +1,9 @@
-import { Action } from '@ngrx/store';
+import { Action } from "@ngrx/store";
 
 export const enum WorkerMessageType {
-  DISPATCH = 'DISPATCH',
-  STATE_UPDATE = 'STATE_UPDATE',
-  ERROR = 'ERROR',
+  DISPATCH = "DISPATCH",
+  STATE_UPDATE = "STATE_UPDATE",
+  ERROR = "ERROR",
 }
 
 export interface DispatchMessage {
