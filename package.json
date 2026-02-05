@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve:ssr:ngrx-webworker": "node dist/ngrx-webworker/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,
@@ -27,6 +28,7 @@
     "@angular/core": "^20.2.0",
     "@angular/forms": "^20.2.0",
     "@angular/platform-browser": "^20.2.0",
+    "@angular/platform-server": "^20.2.0",
     "@angular/router": "^20.2.0",
     "@ngrx/effects": "^20.1.0",
     "@ngrx/store": "^20.1.0",
@@ -38,7 +40,9 @@
     "@angular/cli": "^20.2.0",
     "@angular/compiler-cli": "^20.2.0",
     "@ngrx/schematics": "^21.0.1",
+    "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.17.19",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
